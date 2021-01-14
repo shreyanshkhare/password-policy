@@ -8,6 +8,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { ViewPolicyComponent } from './dashboard/view-policy/view-policy.component';
 import { AddPolicyComponent } from './dashboard/add-policy/add-policy.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardComponent,
     HeaderComponent,
     ViewPolicyComponent,
-    AddPolicyComponent
+    AddPolicyComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
