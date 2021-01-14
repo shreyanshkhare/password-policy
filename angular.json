@@ -121,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "password-policy"
+  "defaultProject": "password-policy",
+  "cli": {
+    "analytics": false
+  }
 }

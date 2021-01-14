@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-body">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+                <a ngbNavLink>Password Policies</a>
+                <ng-template ngbNavContent>                    
+                    <app-view-policy></app-view-policy>                    
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>Add Password Policy</a>
+                <ng-template ngbNavContent>
+                    <app-add-policy></app-add-policy>
+                </ng-template>
+            </li>            
+        </ul>        
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+    
+</div>
