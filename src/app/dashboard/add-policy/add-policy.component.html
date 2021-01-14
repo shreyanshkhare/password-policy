@@ -1,9 +1,75 @@
 <div class="row justify-content-center">
-    <div class="col-sm-8">
-        <p>This page allows you to manage password policy information.</p>
+    <div class="col-sm-12">
+        <p class="text-center">This page allows you to manage password policy information.</p>
         <div class="card">
             <div class="card-body">
-                
+                <!-- <form [formGroup]="addPolicyForm" (ngSubmit)="onSubmit()"> -->
+                    <form>
+                    <div class="form-group row">
+                        <label for="policyName" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control input-sm" id="policyName" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Min. Length</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control input-sm" id="" placeholder="Minimun Length">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Expiration Interval</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control input-sm" id="" placeholder="Expiration Interval">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Password History</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control input-sm" id="" placeholder="Password History">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Must be Aplha-Numeric</label>
+                        <div class="col-sm-10">
+                            <select id="aplhaNumeric" class="form-control input-sm">
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Must be Mixed</label>
+                        <div class="col-sm-10">
+                            <select id="mustBeMixed" class="form-control input-sm">
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Cannot content username</label>
+                        <div class="col-sm-10">
+                            <select id="contentUsername" class="form-control input-sm">
+                                <option selected>Yes</option>
+                                <option>No</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Exclude List:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control input-sm"></textarea>
+                            
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary ">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

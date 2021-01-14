@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPolicyComponent implements OnInit {
   public date: Date = new Date();
+  model = 1;
   constructor() { }
 
   ngOnInit(): void {

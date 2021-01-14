@@ -1,3 +1,8 @@
+
+<div class="row justify-content-center">
+  <div class="col-sm-12">
+
+ <p class="text-center">List Of Policy</p>
 <table class="table table-sm">
     <thead>
       <tr>
@@ -12,7 +17,18 @@
         <th scope="row">1</th>
         <td>Mark</td>
         <td>{{date}}</td>
-        <td>@mdo</td>
+        <td>
+         
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" [value]="1"> Active
+            </label>
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" value="middle"> Deactive
+            </label>         
+          </div>
+        
+        </td>
       </tr>
       <tr>
         <th scope="row">2</th>
@@ -28,3 +44,5 @@
       </tr>
     </tbody>
   </table>
+  </div>
+  </div>
