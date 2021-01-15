@@ -18,7 +18,7 @@
         <td>{{policy.name}}</td>
         <td>{{date}}</td>
         <td>         
-          <input type="checkbox" [checked]="policy.status" (click)="open(content)"/> 
+          <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content)"/> 
         </td>
       </tr>
    
