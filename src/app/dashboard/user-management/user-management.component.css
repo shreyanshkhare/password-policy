@@ -1,0 +1,37 @@
+.form-control {
+
+    width: 50%;
+    height:25px;
+    font-size: 13px;
+    padding:inherit;
+}
+.col-form-label {
+    padding-top: calc(.375rem + .5px);
+    padding-bottom: calc(.375rem + .5px);
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: .5;
+}
+.clr{
+    color:red;
+    padding-left:5px;
+    font-size:x-small;
+}
+.wrng{
+    font-size:11px;
+    /* padding-left: 20px; */
+
+}
+.required-asterisk{
+    color: red;
+    font-weight: bold;
+    margin-left: 3px;
+    font-size: 1.2em;
+}
+.btn-primary {
+    color: rgb(247, 238, 238);
+    background-color: #9e9596;
+    border-color: #9e9596;
+    padding-right: 5px;
+   
+}

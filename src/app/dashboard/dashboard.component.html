@@ -13,6 +13,12 @@
                     <app-add-policy></app-add-policy>
                 </ng-template>
             </li>            
+            <li [ngbNavItem]="3">
+                <a ngbNavLink>User Management</a>
+                <ng-template ngbNavContent>
+                    <app-user-management></app-user-management>
+                </ng-template>
+            </li>  
         </ul>        
         <div [ngbNavOutlet]="nav" class="mt-2"></div>
     </div>

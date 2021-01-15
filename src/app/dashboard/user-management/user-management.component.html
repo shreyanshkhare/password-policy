@@ -1,0 +1,110 @@
+<div class="container-fluid">
+    <form [formGroup]="userEmails">
+
+        <h5>Login Details</h5>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Email Address</label>
+            <div class="col-sm-6">
+                <input [class.is-invalid]="primEmail.invalid && primEmail.touched" type="email" class="form-control"
+                    formControlName="primaryEmail" />
+            </div>
+
+            <div class="col-sm-4" *ngIf="(primEmail.invalid && primEmail.touched) || primEmail.dirty">
+                <small *ngIf="primEmail.errors?.required" class="text-danger"><span
+                        class="required-asterisk">*</span>Email Address is required</small>
+                <!--question mark(?) is a safe navigation operator-->
+                <small *ngIf="primEmail.errors?.pattern" class="text-danger">Please provide a valid email
+                    address</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Verify Email Address</label>
+            <div class="col-sm-6">
+                <input [class.is-invalid]="secondEmail.invalid && secondEmail.touched" type="email" class="form-control"
+                    formControlName="secondaryEmail" />
+            </div>
+            <div class="col-sm-4" *ngIf="(secondEmail.invalid && secondEmail.touched) || secondEmail.dirty">
+                <small *ngIf="secondEmail.errors?.required" class="text-danger">Secondary email is required</small>
+                <small *ngIf="secondEmail.errors?.pattern" class="text-danger">Please provide a valid email
+                    address</small>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Password:</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" formControlName="password" />
+            </div>
+            <!-- <div class="col-sm-4" *ngIf="(password.invalid && password.touched) || password.dirty">
+          <small *ngIf="secondEmail.errors?.required" class="text-danger">Password is required</small>
+        </div> -->
+
+        </div>
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">Require Password Change</label>
+            <div class="col-sm-6">
+                <select id="aplhaNumeric" class="form-control input-sm">
+                    <option selected>No</option>
+                    <option>Yes</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Password:</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" />
+            </div>
+
+        </div>
+        <h5>Contact Details</h5>
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>First Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control input-sm" id="" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Last Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control input-sm" id="" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Company Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control input-sm" id="" placeholder="">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">Country</label>
+            <div class="col-sm-6">
+                <select id="aplhaNumeric" class="form-control input-sm">
+                    <option selected>India</option>
+                    <!-- <option>Yes</option> -->
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="" class="col-sm-2 col-form-label">Preferred Language</label>
+            <div class="col-sm-6">
+                <select id="aplhaNumeric" class="form-control input-sm">
+                    <option selected>English</option>
+                    <!-- <option>Yes</option> -->
+                </select>
+            </div>
+        </div>
+        <span class="wrng">By Clicking on Submit you accept the Veritas Account</span><span class="clr">Privacy
+            Notice</span>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary ">Cancel</button>&nbsp;
+            <button type="submit" class="btn btn-danger ">Submit</button>
+        </div>
+
+
+
+
+
+    </form>
+
+</div>
