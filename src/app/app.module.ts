@@ -10,6 +10,10 @@ import { AddPolicyComponent } from './dashboard/add-policy/add-policy.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import { MarkAsteriskDirective } from './dashboard/directives/mark-asterisk.directive';
+import { UserManagementComponent } from './dashboard/user-management/user-management.component';
+
+// new wala
 
 //http request 
 import { HttpClientModule } from "@angular/common/http";
@@ -22,7 +26,9 @@ import { HttpClientModule } from "@angular/common/http";
     HeaderComponent,
     ViewPolicyComponent,
     AddPolicyComponent,
-    AuthComponent
+    AuthComponent,
+    MarkAsteriskDirective,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +36,7 @@ import { HttpClientModule } from "@angular/common/http";
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+
     AppRoutingModule,
     HttpClientModule
   ],
