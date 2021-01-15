@@ -21,7 +21,9 @@
           <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content)"/> 
         </td>
       </tr>
-   
+      <tr class="text-center" *ngIf="policies?.length == undefined || policies?.length > 0">
+        <td colspan="4">Policy not found!</td>
+      </tr>
     </tbody>
   </table>
   </div>

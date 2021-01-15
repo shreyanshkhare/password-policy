@@ -11,6 +11,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 
+//http request 
+import { HttpClientModule } from "@angular/common/http";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +30,8 @@ import { AuthComponent } from './auth/auth.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
