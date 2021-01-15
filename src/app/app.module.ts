@@ -17,6 +17,7 @@ import { UserManagementComponent } from './dashboard/user-management/user-manage
 
 //http request 
 import { HttpClientModule } from "@angular/common/http";
+import { PolicyService } from './services/policy.service';
 
 
 @NgModule({
@@ -38,9 +39,9 @@ import { HttpClientModule } from "@angular/common/http";
     NgbModule,
 
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [PolicyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
