@@ -15,24 +15,28 @@ import {PolicyService} from 'src/app/services/policy.service';
 export class ViewPolicyComponent implements OnInit {
   public date: Date = new Date();
   model = 1;
+  policies;
   //policies:Policies[];
-  policies = [ {
-    id:1,
-    name: 'Policy 1',
-    lastUpdated: 'f/f3/Flag_of_Russia.svg',
-    status: true,
-  }, {
-    id:2,
-    name: 'Policy 2',
-    lastUpdated: 'f/f3/Flag_of_Russia.svg',
-    status: false,
-  }]
+  // policies = [ {
+  //   id:1,
+  //   name: 'Policy 1',
+  //   lastUpdated: 'f/f3/Flag_of_Russia.svg',
+  //   status: true,
+  // }, {
+  //   id:2,
+  //   name: 'Policy 2',
+  //   lastUpdated: 'f/f3/Flag_of_Russia.svg',
+  //   status: false,
+  // }]
   constructor(config: NgbModalConfig, private modalService: NgbModal,private policyService: PolicyService, ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
+  getActiveTab(){
+    this.policyService.activeTab;
+  }
   open(content) {
     this.modalService.open(content);
   }
@@ -41,13 +45,15 @@ export class ViewPolicyComponent implements OnInit {
     this.getPolicies();
   }
   getPolicies() {  
-  
+    // console.log(this.policyService.getPolicies());
+    // const data = this.policyService.getPolicies();
+    // this.policies = data;
+
     let result = this.policyService.getPolicies().subscribe(
       data => {
-      //this.policies = data;
+      this.policies = data;
       // console.log(this.policies);
       });;
-    //this.policies = result.arrPolicies;
    
   }
 
