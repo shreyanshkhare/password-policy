@@ -1,12 +1,9 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-
-// ideallay create a model, will do that once we connect to the backend
-class User {
-    constructor(public email: string) {}
-}
+import { BehaviorSubject, Observable, Subject, throwError } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
+import {User} from "./user.modal";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -15,36 +12,42 @@ export class AuthService {
 
     constructor(private router: Router, private httpClient: HttpClient) {}
 
-    private successHandler(email: string, onSuccess: Function) {
-        const user = new User(email);
-        localStorage.setItem('userData', JSON.stringify(user));
-        this.user.next(user);
-        onSuccess();
+    handleError(errRes: HttpErrorResponse) {
+        if (!errRes.error) {
+            return throwError('An unknown error occurred!');
+        }
+
+        return throwError(errRes.error);
     }
 
-    signUp(email: string, password: string, afterSuccess: Function) {
-        return this.successHandler(email, afterSuccess);
+    signUp(email: string, password: string) {
         return this.httpClient.post(
             '/api/user/',
             {
                 email, password
             },
-        ).subscribe(responseData => {
-            console.log('responseData -->>', responseData)
-        })
+        ).pipe(
+            catchError(this.handleError)
+        )
     }
 
-    login(email: string, password: string, afterSuccess: Function) {
-        return this.successHandler(email, afterSuccess);
+    login(email: string, password: string) {
         return this.httpClient.post(
             '/api/login/',
             {
-                email, password
+                username: email, password
             },
-        ).subscribe(responseData => {
-            console.log('responseData -->>', responseData)
-        })
-        
+        ).pipe(
+            catchError(this.handleError),
+            tap(
+                (responseData: any) => {
+                    const {email, token, user_id: userId } = responseData;
+                    const user = new User(email, token, userId);
+                    localStorage.setItem('userData', JSON.stringify(user));
+                    this.user.next(user);
+                } 
+            )
+        )       
     }
 
     logout() {
