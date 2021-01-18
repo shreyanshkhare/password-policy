@@ -12,12 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { MarkAsteriskDirective } from './dashboard/directives/mark-asterisk.directive';
 import { UserManagementComponent } from './dashboard/user-management/user-management.component';
-
-// new wala
-
-//http request 
-import { HttpClientModule } from "@angular/common/http";
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptorService } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +36,7 @@ import { HttpClientModule } from "@angular/common/http";
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -43,7 +43,7 @@ const POLICIES: Policies[] = [
 export class ViewPolicyComponent implements OnInit {
   public date: Date = new Date();
   model = 1;
-  policies: Array<Policies>;
+  policies = POLICIES;
   
   constructor(config: NgbModalConfig, private modalService: NgbModal,private policyService: PolicyService, ) {
     // customize default values of modals used by this component tree
