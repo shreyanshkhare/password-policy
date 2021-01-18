@@ -12,12 +12,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { MarkAsteriskDirective } from './dashboard/directives/mark-asterisk.directive';
 import { UserManagementComponent } from './dashboard/user-management/user-management.component';
+// import { MatSelectCountryModule } from '@angular-material-extensions/select-country'; 
+// import { NgxCountrySelectModule } from '../../node_modules/ngx-country-select';
 
-// new wala
+// new
 
 //http request 
 import { HttpClientModule } from "@angular/common/http";
 import { PolicyService } from './services/policy.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -35,11 +39,12 @@ import { PolicyService } from './services/policy.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     NgbModule,
-
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [PolicyService],
   bootstrap: [AppComponent]
