@@ -12,18 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import { MarkAsteriskDirective } from './dashboard/directives/mark-asterisk.directive';
 import { UserManagementComponent } from './dashboard/user-management/user-management.component';
-// import { MatSelectCountryModule } from '@angular-material-extensions/select-country'; 
-// import { NgxCountrySelectModule } from '../../node_modules/ngx-country-select';
-
-// new
-
-//http request 
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { PolicyService } from './services/policy.service';
+import { AuthInterceptorService } from './auth/auth-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +39,9 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     BrowserAnimationsModule,
   ],
-  providers: [PolicyService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    PolicyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
