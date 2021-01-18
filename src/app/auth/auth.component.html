@@ -19,10 +19,21 @@
                 </div>
             </div>
             <div>
-                <button class="btn btn-primary" type="submit" [disabled]="!f.valid">{{isLoginMode ? 'Login' : 'Sign Up'}}</button> | 
+                <button 
+                  class="btn btn-primary"
+                  type="submit" [disabled]="!f.valid">{{isLoginMode ? 'Login' : 'Sign Up'}}</button> | 
                 <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to {{isLoginMode ? 'Sign Up':'Login'}}</button>
             </div>
         </form>
+        <div
+            [ngClass]="{
+                'alert-success': alertObj.status === 'success',
+                'alert-danger': alertObj.status === 'error'
+            }"
+            class="alert"
+            role="alert" *ngIf="alertObj !== null">
+            {{alertObj.message}}
+        </div>
     </div>
 </div>
 </div>
