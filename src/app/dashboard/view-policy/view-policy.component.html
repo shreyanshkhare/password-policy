@@ -13,6 +13,7 @@
       </tr>
     </thead>
     <tbody>
+      <ng-container *ngIf="policies">
       <tr *ngFor="let policy of policies; let i = index;">    
         <th scope="row">{{i+1}}</th>
         <td>{{policy.name}}</td>
@@ -21,9 +22,10 @@
           <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content)"/> 
         </td>
       </tr>
-      <tr class="text-center" *ngIf="policies?.length == undefined || policies?.length > 0">
+      <tr class="text-center" *ngIf="policies.length < 0">
         <td colspan="4">Policy not found!</td>
       </tr>
+      </ng-container>
     </tbody>
   </table>
   </div>

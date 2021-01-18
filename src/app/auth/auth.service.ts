@@ -10,7 +10,7 @@ class User {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    user = new Subject;
+    user = new BehaviorSubject<User>(null);
     authObservable = new Observable();
 
     constructor(private router: Router, private httpClient: HttpClient) {}

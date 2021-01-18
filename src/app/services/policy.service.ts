@@ -8,16 +8,13 @@ import {Policies} from '../shared/models/policy.model'
 export class PolicyService {
 
   constructor(private http: HttpClient) { }
+  //constructor() { }
 
-  getPolicies(){
+
+    getPolicies(): Observable<Policies[]> {
     //console.log("In service")
-    const result = this.http.get("https://jsonplaceholder.typicode.com/todos");
-    let arrPolicies = [ {
-      id:1,
-      name: 'Policy 1',
-      lastUpdated: 'f/f3/Flag_of_Russia.svg',
-      status: false,
-    }];
+    const result = this.http.get<Policies[]>("https://jsonplaceholder.typicode.com/todos");
+   
     return result;
   }
 }
