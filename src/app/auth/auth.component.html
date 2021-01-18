@@ -4,11 +4,19 @@
         <form #f="ngForm" (ngSubmit)="onSubmit(f)">
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" class="form-control" ngModel name="email" required email>
+                <input type="email" id="email" class="form-control" ngModel name="email" required email #emailInput="ngModel">
+                <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+                  <small *ngIf="emailInput.hasError('required')" class="text-danger">Email is required</small>
+                  <small *ngIf="!emailInput.hasError('required')" class="text-danger">Email is invalid</small>
+                </div>
+                
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6">
+                <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6" #pwInput="ngModel">
+                <div *ngIf="pwInput.invalid && (pwInput.dirty || pwInput.touched)">
+                    <small class="text-danger">Password should have atleast 6 charachter</small>
+                </div>
             </div>
             <div>
                 <button class="btn btn-primary" type="submit" [disabled]="!f.valid">{{isLoginMode ? 'Login' : 'Sign Up'}}</button> | 

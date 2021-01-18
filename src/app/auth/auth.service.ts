@@ -23,6 +23,7 @@ export class AuthService {
     }
 
     signUp(email: string, password: string, afterSuccess: Function) {
+        return this.successHandler(email, afterSuccess);
         return this.httpClient.post(
             '/api/user/',
             {
@@ -31,11 +32,19 @@ export class AuthService {
         ).subscribe(responseData => {
             console.log('responseData -->>', responseData)
         })
-        // this.successHandler(email, afterSuccess);
     }
 
     login(email: string, password: string, afterSuccess: Function) {
         return this.successHandler(email, afterSuccess);
+        return this.httpClient.post(
+            '/api/login/',
+            {
+                email, password
+            },
+        ).subscribe(responseData => {
+            console.log('responseData -->>', responseData)
+        })
+        
     }
 
     logout() {

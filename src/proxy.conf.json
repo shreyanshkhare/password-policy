@@ -1,6 +1,8 @@
 {
-    "/api": {
-      "target": "http://localhost:8000/api",
-      "secure": false
-    }
+  "/api/*": {
+    "target": "https://premchalmeti.com/pwd",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
   }
+}
