@@ -12,20 +12,13 @@
                         <label for="email" class="col-sm-2 col-form-label">Email Address</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="text" formControlName="email" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
-                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback" value="mamta66k@gmail.com">
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback" value={{userMail}}>
                                 <div *ngIf="f.email.errors.required">Email is required</div>
                                 <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
                             </div>
                         </div>
                     </div>
                     <!-- <div class="form-group row">
-                        <label class="col-sm-4">Verify Email Address</label>
-                        <input type="text" formControlName="confirmEmail" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }" />
-                        <div class="col-sm-10 input-group-sm">
-
-                        </div>
-                    </div> -->
-                    <div class="form-group row">
                         <label for="confirmEmail" class="col-sm-2 col-form-label">Verify Email Address</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="text" formControlName="confirmEmail" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }" />
@@ -34,17 +27,17 @@
                                 <div *ngIf="f.confirmEmail.errors.minlength">Email Id must match</div>
                             </div>
                         </div>
-                    </div>
-                    <!-- <div class="form-group row">
+                    </div> -->
+                    <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="password" formControlName="password" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.password.errors }"placeholder="" />
-                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="(submitted && f.password.errors)" class="invalid-feedback">
                                 <div *ngIf="f.password.errors.required">Password is required</div>
                                 <div *ngIf="f.password.errors.emailValidator">Password must be at least 6 characters</div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <h4>Contact Details</h4>
                     <!-- <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Require Password Change</label>
@@ -58,9 +51,9 @@
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">First Name</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" formControlName="firstName" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"placeholder="" />
-                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                            <input type="text" formControlName="first_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.first_name.errors.required">First Name is required</div>
                             
                             </div>
                         </div>
@@ -68,9 +61,9 @@
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Last Name</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" formControlName="lastName" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"placeholder="" />
-                            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                            <input type="text" formControlName="last_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.last_name.errors.required">Last Name is required</div>
                             
                             </div>
                         </div>
@@ -78,9 +71,9 @@
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Company Name</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" formControlName="companyName" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }"placeholder="" />
-                            <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
-                                <div *ngIf="f.companyName.errors.required">Company name is required</div>
+                            <input type="text" formControlName="company_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.company_name.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.company_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.company_name.errors.required">Company name is required</div>
                             
                             </div>
                         </div>
@@ -105,9 +98,9 @@
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Preferred Language</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" formControlName="language" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.language.errors }"placeholder="" />
-                            <div *ngIf="submitted && f.language.errors" class="invalid-feedback">
-                                <div *ngIf="f.language.errors.required">Preferred Language is required</div>
+                            <input type="text" formControlName="preferred_language" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.preferred_language.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.preferred_language.errors" class="invalid-feedback">
+                                <div *ngIf="f.preferred_language.errors.required">Preferred Language is required</div>
                             
                             </div>
                         </div>
@@ -116,7 +109,7 @@
                         Notice</span></div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-sm btn-outline-primary mr-3 ">Cancel</button>
+                        <button type="cancel" class="btn btn-sm btn-outline-primary mr-3 " (click)="onCancel()">Cancel</button>
                         <button type="submit" class="btn btn-sm btn-danger ">Submit</button>
                     </div>
                 </form>

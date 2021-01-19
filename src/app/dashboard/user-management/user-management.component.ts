@@ -16,48 +16,50 @@ export class UserManagementComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   error = null;
+  userID;
+  userData;
   constructor(private formBuilder: FormBuilder,private toastr: ToastrService,private http:HttpClient) { }
 
   ngOnInit() {
-    // email.setValue('Nancy');
-    this.registerForm = this.formBuilder.group({
 
-        email: ['', [Validators.required, Validators.email]],
-        confirmEmail: ['', [Validators.required]],
-        // password: ['', [Validators.required, Validators.minLength(6)]],
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        companyName: ['', Validators.required],
-        country: ['', Validators.required],
-        language:['', Validators.required]
+      this.userData = JSON.parse(localStorage.getItem('userData'));
+      const userMail = this.userData['email'];
+      this.userID = this.userData['userId'];
+      console.log("userMail", userMail)
+      // email.setValue('Nancy');
+      this.registerForm = this.formBuilder.group({
+          email: [userMail, [Validators.required, Validators.email]],
+          // confirmEmail: ['', [Validators.required]],
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          last_name: ['', Validators.required],
+          first_name: ['', Validators.required],
+          company_name: ['', Validators.required],
+          country: ['India', Validators.required],
+          preferred_language: ['', Validators.required]
     }, {
-        validator: emailValidator('email', 'confirmEmail')
+        // validator: emailValidator('email', 'confirmEmail')
     });
 }
 
 
-onFormSubmit(data){
-    console.log("in post request",data);
-
-}
-
 get f() { return this.registerForm.controls; }
 
 onSubmit() {
-
-    const data = this.registerForm.value
+    const data =this. registerForm.value
     console.log("onSubmit form data", data)
     this.submitted = true;   
-
-    // stop here if form is invalid
+    // const pdata = {email:this.userData['email'],
+    // password:"test@123",
+    // first_name:"test",
+    // last_name:"test2",
+    // company_name:"xoriant",
+    // country:"India"}
     if (this.registerForm.invalid) {
         this.toastr.error('Enter correct user details');
-
     }  
     else{
-        console.log("form data sent")
         this.http
-        .post('https://policypoc-default-rtdb.firebaseio.com/posts.json',
+        .put("/api/user/"+this.userID+'/',
         data
         ).subscribe(responseData => {
             console.log("responseData", responseData);
@@ -68,11 +70,15 @@ onSubmit() {
         //     this.error = error.messages;
         //     console.log("error")
         // });
-        });
-        
+        });   
     }
     console.log("form values",this.registerForm.value);
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
-    //https://premchalmeti.com/pwd/api/user/
+}
+onCancel(){
+    console.log("in cancel")
+    this.registerForm.reset()
+    this.toastr.warning("Cancel")
 }
 }
+
