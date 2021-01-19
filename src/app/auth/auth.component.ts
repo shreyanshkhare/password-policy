@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -12,9 +13,8 @@ import { AuthService } from './auth.service';
 export class AuthComponent implements OnInit, OnDestroy {
     isLoginMode: boolean = true;
     loginSubscription: Subscription;
-    alertObj = null;
 
-    constructor(private router: Router, private authService: AuthService) {}
+    constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
 
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
@@ -36,10 +36,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     handleError(errors, form) {
         if(!!errors['non_field_errors']) {
-            this.alertObj = {
-                status: 'error',
-                message: errors["non_field_errors"]
-            }
+            this.toastr.error(errors["non_field_errors"])
         }
 
         Object.entries(errors).forEach(([key,value]) => {
@@ -68,13 +65,7 @@ export class AuthComponent implements OnInit, OnDestroy {
                 (responseData) => {
                     this.onSwitchMode();
                     form.reset();
-                    this.alertObj = {
-                        status: 'success',
-                        message: 'Signup successfully please relogin with the newly created crediantials'
-                    }
-                    setTimeout(() => {
-                        this.alertObj = null;
-                    }, 5000);
+                    this.toastr.success('Signup successfully please relogin with the newly created crediantials');
                 },
                 (errors) => {this.handleError(errors, form)}
             );

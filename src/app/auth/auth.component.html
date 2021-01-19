@@ -1,40 +1,40 @@
-<div class="container">
-<div class="row my-md-5">
-    <div class="col-xs-12 col-md-6 m-auto">
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" class="form-control" ngModel name="email" required email #emailInput="ngModel">
-                <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-                  <small *ngIf="emailInput.hasError('required')" class="text-danger">Email is required</small>
-                  <small *ngIf="emailInput.hasError('email')" class="text-danger">Email is invalid</small>
-                  <small *ngIf="emailInput.hasError('emailError')" class="text-danger">{{emailInput.errors.emailError}}</small>
+<div class="container d-flex align-items-center" style="height: 100vh;">
+    <div class="card flex-grow-1">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-sm-12">
+                    <h3 class="text-center">{{isLoginMode ? 'Sign in' : 'Create account'}}</h3>
+                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" class="form-control" ngModel name="email" required email
+                                #emailInput="ngModel">
+                            <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
+                                <small *ngIf="emailInput.hasError('required')" class="text-danger">Email is
+                                    required</small>
+                                <small *ngIf="emailInput.hasError('email')" class="text-danger">Email is invalid</small>
+                                <small *ngIf="emailInput.hasError('emailError')"
+                                    class="text-danger">{{emailInput.errors.emailError}}</small>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" ngModel name="password" required
+                                minlength="6" #pwInput="ngModel">
+                            <div *ngIf="pwInput.invalid && (pwInput.dirty || pwInput.touched)">
+                                <small class="text-danger">Password should have atleast 6 charachter</small>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">{{isLoginMode ? 'Sign in'
+                                : 'Sign Up'}}</button> |
+                            <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to
+                                {{isLoginMode ? 'Sign Up':'Sign in'}}</button>
+                        </div>
+                    </form>
                 </div>
-                
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" ngModel name="password" required minlength="6" #pwInput="ngModel">
-                <div *ngIf="pwInput.invalid && (pwInput.dirty || pwInput.touched)">
-                    <small class="text-danger">Password should have atleast 6 charachter</small>
-                </div>
-            </div>
-            <div>
-                <button 
-                  class="btn btn-primary"
-                  type="submit" [disabled]="!f.valid">{{isLoginMode ? 'Login' : 'Sign Up'}}</button> | 
-                <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to {{isLoginMode ? 'Sign Up':'Login'}}</button>
-            </div>
-        </form>
-        <div
-            [ngClass]="{
-                'alert-success': alertObj.status === 'success',
-                'alert-danger': alertObj.status === 'error'
-            }"
-            class="alert"
-            role="alert" *ngIf="alertObj !== null">
-            {{alertObj.message}}
         </div>
     </div>
-</div>
 </div>
