@@ -43,7 +43,8 @@ export class AuthComponent implements OnInit, OnDestroy {
         }
 
         Object.entries(errors).forEach(([key,value]) => {
-            form.form.controls[key].setErrors({[key]: value});
+            const errorKey = `${key}Error`;
+            form.form.controls[key].setErrors({[errorKey]: value});
         });
     }
     
