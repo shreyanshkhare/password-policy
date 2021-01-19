@@ -45,9 +45,9 @@ export class AuthService {
                     const user = new User(email, token, userId);
                     localStorage.setItem('userData', JSON.stringify(user));
                     this.user.next(user);
-                } 
+                }
             )
-        )       
+        )
     }
 
     logout() {
