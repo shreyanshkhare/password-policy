@@ -2,32 +2,39 @@
 <div class="row justify-content-center">
   <div class="col-sm-12">
 
- <p class="text-center">List Of Policy</p>
-<table class="table table-sm">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Last Updated</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngIf="policies">
-      <tr *ngFor="let policy of policies; let i = index;">    
-        <th scope="row">{{i+1}}</th>
-        <td>{{policy.name}}</td>
-        <td>{{date}}</td>
-        <td>         
-          <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content)"/> 
-        </td>
-      </tr>
-      <tr class="text-center" *ngIf="policies.length < 0">
-        <td colspan="4">Policy not found!</td>
-      </tr>
-      </ng-container>
-    </tbody>
-  </table>
+ <div class="card">
+   <div class="card-header border-bottom-0">
+    List Of Policy
+   </div>
+   <div class="card-body">
+    <table class="table table-sm  table-striped">
+      <thead class="thead-bg-indigo">
+        <tr>
+          <th scope="col">Sno</th>
+          <th scope="col">Name</th>
+          <th scope="col">Last Updated</th>
+          <th scope="col">Policy Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="policies">
+        <tr *ngFor="let policy of policies; let i = index;">    
+          <td scope="row">{{i+1}}</td>
+          <td>{{policy.name}}</td>
+          <td>{{policy.last_updated}} </td>
+          <td>         
+            <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content)"/> 
+          </td>
+        </tr>
+        <tr class="text-center" *ngIf="policies.length < 0">
+          <td colspan="4">Policy not found!</td>
+        </tr>
+        </ng-container>
+      </tbody>
+    </table>
+   </div>
+ </div>
+
   </div>
   </div>
 
@@ -53,7 +60,7 @@
           </div>
       </div>
       <div class="form-group row">
-        <label for="varificationPassword" class="col-sm-5 col-form-label"> Varification</label>
+        <label for="varificationPassword" class="col-sm-5 col-form-label"> Confirm Password</label>
         <div class="col-sm-7">
             <input type="password" class="form-control input-sm" id="varificationPassword" value="">
         </div>

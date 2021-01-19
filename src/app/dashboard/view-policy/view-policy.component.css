@@ -1,0 +1,6 @@
+.table.table-sm tbody tr td, .table.table-sm tbody tr th {
+    font-size: 0.9rem;
+}
+.thead-bg-indigo {
+    background-color: #bdbdf9;
+}

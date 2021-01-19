@@ -1,0 +1,13 @@
+.nav-item .nav-link.active {
+    color: #08086d;
+    border-top: 3px solid #17a2b8;
+}
+.nav-item .nav-link {
+    color:#fff;
+}
+.nav-link:hover {
+    border-color: transparent;
+}
+.bg-gred {
+    background:linear-gradient(-45deg,#072b90,#0644a0,#055aae,#0381c8,#00d4ff);
+}

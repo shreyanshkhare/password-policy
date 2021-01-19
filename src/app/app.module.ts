@@ -10,7 +10,7 @@ import { AddPolicyComponent } from './dashboard/add-policy/add-policy.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
-import { MarkAsteriskDirective } from './dashboard/directives/mark-asterisk.directive';
+//import { MarkAsteriskDirective } from './dashboard/directives/mark-asterisk.directive';
 import { UserManagementComponent } from './dashboard/user-management/user-management.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { PolicyService } from './services/policy.service';
@@ -23,8 +23,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor';
     HeaderComponent,
     ViewPolicyComponent,
     AddPolicyComponent,
-    AuthComponent,
-    MarkAsteriskDirective,
+    AuthComponent,   
     UserManagementComponent
   ],
   imports: [

@@ -8,10 +8,10 @@ import {PolicyService} from 'src/app/services/policy.service';
   styleUrls: ['./add-policy.component.css']
 })
 export class AddPolicyComponent implements OnInit {
-  
+  submitted = false;
   addPolicyForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private policyService: PolicyService) { }
-
+  
   ngOnInit(): void {
     this.addPolicyForm = this.formBuilder.group({      
       name: ['', Validators.required],
@@ -25,14 +25,22 @@ export class AddPolicyComponent implements OnInit {
       excludeList: ''
     });
   }
-
-  onSubmit() {
-    this.policyService.addPolicy(this.addPolicyForm.value)
-    .subscribe( data => {
-      console.log(data);
-    });
-
-    this.addPolicyForm.reset();
+  get policyFormControl() {
+    return this.addPolicyForm.controls;
   }
-
+  
+  onSubmit() {
+    this.submitted = true;
+    if (this.addPolicyForm.valid) {
+      this.policyService.addPolicy(this.addPolicyForm.value)
+      .subscribe( data => {
+        console.log(data);
+      });    
+      this.addPolicyForm.reset();
+    }else{
+      console.log("form is invalid");
+    }
+    
+  }
+  
 }
