@@ -15,7 +15,8 @@ import { UserManagementComponent } from './dashboard/user-management/user-manage
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { PolicyService } from './services/policy.service';
 import { AuthInterceptorService } from './auth/auth-interceptor';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,11 +31,12 @@ import { AuthInterceptorService } from './auth/auth-interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     NgbModule,
-
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },

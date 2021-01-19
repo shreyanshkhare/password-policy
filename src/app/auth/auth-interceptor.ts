@@ -2,7 +2,8 @@ import { HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http"
 
 export class AuthInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        if (['/api/login/', '/api/user/'].includes(req.url)) {
+        console.log("req.url",req.url);
+        if (['/api/login/',].includes(req.url)) {
             return next.handle(req);
         }
 

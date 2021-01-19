@@ -1,110 +1,120 @@
-<div class="container-fluid">
-    <form [formGroup]="userEmails">
 
-        <h5>Login Details</h5>
+<div class="row justify-content-center">
+    <div class="col-sm-12">
+        <p class="text-center">This page allows you to manage user</p>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Email Address</label>
-            <div class="col-sm-6">
-                <input [class.is-invalid]="primEmail.invalid && primEmail.touched" type="email" class="form-control"
-                    formControlName="primaryEmail" />
-            </div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Login Detals</h4>
+                <!-- <form [formGroup]="addPolicyForm" (ngSubmit)="onSubmit()"> -->
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">Email Address</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <input type="text" formControlName="email" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback" value={{userMail}}>
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
+                        <label for="confirmEmail" class="col-sm-2 col-form-label">Verify Email Address</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <input type="text" formControlName="confirmEmail" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }" />
+                            <div *ngIf="submitted && f.confirmEmail.errors" class="invalid-feedback">
+                                <div *ngIf="f.confirmEmail.errors.required">Confirmed Email is required</div>
+                                <div *ngIf="f.confirmEmail.errors.minlength">Email Id must match</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <input type="password" formControlName="password" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.password.errors }"placeholder="" />
+                            <div *ngIf="(submitted && f.password.errors)" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.emailValidator">Password must be at least 6 characters</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Contact Details</h4>
+                    <!-- <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Require Password Change</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <select id="aplhaNumeric" class="form-control input-sm">
+                                <option selected>No</option>
+                            </select> 
+                        </div>
+                    </div> -->
 
-            <div class="col-sm-4" *ngIf="(primEmail.invalid && primEmail.touched) || primEmail.dirty">
-                <small *ngIf="primEmail.errors?.required" class="text-danger"><span
-                        class="required-asterisk">*</span>Email Address is required</small>
-                <!--question mark(?) is a safe navigation operator-->
-                <small *ngIf="primEmail.errors?.pattern" class="text-danger">Please provide a valid email
-                    address</small>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">First Name</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <input type="text" formControlName="first_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.first_name.errors.required">First Name is required</div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Last Name</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <input type="text" formControlName="last_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Company Name</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <input type="text" formControlName="company_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.company_name.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.company_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.company_name.errors.required">Company name is required</div>
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Country</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <select id="aplhaNumeric" class="form-control input-sm" formControlName="country"
+                            [ngClass]="{ 'is-invalid': submitted && f.country.errors }" placeholder="Select Country">
+                                <option selected>India</option>
+                                <option>Australia</option>
+                                <option>Canada</option>
+                                <option>Denmark</option>
+                                <option>France</option>
+                            </select> 
+                            <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                <div *ngIf="f.country.errors.required">Country is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label">Preferred Language</label>
+                        <div class="col-sm-10 input-group-sm">
+                            <input type="text" formControlName="preferred_language" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.preferred_language.errors }"placeholder="" />
+                            <div *ngIf="submitted && f.preferred_language.errors" class="invalid-feedback">
+                                <div *ngIf="f.preferred_language.errors.required">Preferred Language is required</div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrng"> By clicking on Submit you accept the Veritas Account<span class="clr">Privacy
+                        Notice</span></div>
+
+                    <div class="text-center">
+                        <button type="cancel" class="btn btn-sm btn-outline-primary mr-3 " (click)="onCancel()">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-danger ">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Verify Email Address</label>
-            <div class="col-sm-6">
-                <input [class.is-invalid]="secondEmail.invalid && secondEmail.touched" type="email" class="form-control"
-                    formControlName="secondaryEmail" />
-            </div>
-            <div class="col-sm-4" *ngIf="(secondEmail.invalid && secondEmail.touched) || secondEmail.dirty">
-                <small *ngIf="secondEmail.errors?.required" class="text-danger">Secondary email is required</small>
-                <small *ngIf="secondEmail.errors?.pattern" class="text-danger">Please provide a valid email
-                    address</small>
-            </div>
-
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Password:</label>
-            <div class="col-sm-6">
-                <input type="password" class="form-control" formControlName="password" />
-            </div>
-            <!-- <div class="col-sm-4" *ngIf="(password.invalid && password.touched) || password.dirty">
-          <small *ngIf="secondEmail.errors?.required" class="text-danger">Password is required</small>
-        </div> -->
-
-        </div>
-        <div class="form-group row">
-            <label for="" class="col-sm-2 col-form-label">Require Password Change</label>
-            <div class="col-sm-6">
-                <select id="aplhaNumeric" class="form-control input-sm">
-                    <option selected>No</option>
-                    <option>Yes</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Password:</label>
-            <div class="col-sm-6">
-                <input type="password" class="form-control" />
-            </div>
-
-        </div>
-        <h5>Contact Details</h5>
-        <div class="form-group row">
-            <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>First Name</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control input-sm" id="" placeholder="">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Last Name</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control input-sm" id="" placeholder="">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Company Name</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control input-sm" id="" placeholder="">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="" class="col-sm-2 col-form-label">Country</label>
-            <div class="col-sm-6">
-                <select id="aplhaNumeric" class="form-control input-sm">
-                    <option selected>India</option>
-                    <!-- <option>Yes</option> -->
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="" class="col-sm-2 col-form-label">Preferred Language</label>
-            <div class="col-sm-6">
-                <select id="aplhaNumeric" class="form-control input-sm">
-                    <option selected>English</option>
-                    <!-- <option>Yes</option> -->
-                </select>
-            </div>
-        </div>
-        <span class="wrng">By Clicking on Submit you accept the Veritas Account</span><span class="clr">Privacy
-            Notice</span>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary ">Cancel</button>&nbsp;
-            <button type="submit" class="btn btn-danger ">Submit</button>
-        </div>
-
-
-
-
-
-    </form>
-
+    </div>
 </div>
+
