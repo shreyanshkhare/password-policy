@@ -34,13 +34,17 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.loginSubscription.unsubscribe();
     }
 
-    handleError(error) {
-        if(Object.keys(error).includes('non_field_errors')) {
+    handleError(errors, form) {
+        if(!!errors['non_field_errors']) {
             this.alertObj = {
                 status: 'error',
-                message: error["non_field_errors"]
+                message: errors["non_field_errors"]
             }
         }
+
+        Object.entries(errors).forEach(([key,value]) => {
+            form.form.controls[key].setErrors({[key]: value});
+        });
     }
     
 
@@ -56,7 +60,7 @@ export class AuthComponent implements OnInit, OnDestroy {
                 (responseData) => {
                     this.router.navigate(['/dashboard']);
                 },
-                this.handleError
+                (errors) => {this.handleError(errors, form)}
             );
         } else {
             this.authService.signUp(email, password).subscribe(
@@ -71,7 +75,7 @@ export class AuthComponent implements OnInit, OnDestroy {
                         this.alertObj = null;
                     }, 5000);
                 },
-                this.handleError
+                (errors) => {this.handleError(errors, form)}
             );
         }
     }
