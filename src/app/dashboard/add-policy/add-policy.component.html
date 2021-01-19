@@ -4,65 +4,65 @@
         <div class="card">
             <div class="card-body">
                 <!-- <form [formGroup]="addPolicyForm" (ngSubmit)="onSubmit()"> -->
-                    <form>
+                    <form [formGroup]="addPolicyForm" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
                         <label for="policyName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" class="form-control input-sm" id="policyName" value="">
+                            <input type="text" formControlName="name" name="name" class="form-control input-sm" id="policyName" value="" placeholder="Policy Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Min. Length</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" class="form-control input-sm" id="" placeholder="Minimun Length">
+                            <input type="text" formControlName="min_length" name="min_length" class="form-control input-sm" id="" placeholder="Minimun Length">
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Expiration Interval</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" class="form-control input-sm" id="" placeholder="Expiration Interval">
+                            <input type="text" formControlName="exp_interval" name="exp_interval" class="form-control input-sm" id="" placeholder="Expiration Interval">
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Password History</label>
                         <div class="col-sm-10 input-group-sm">
-                            <input type="text" class="form-control input-sm" id="" placeholder="Password History">
+                            <input type="text" formControlName="pwd_history" name="pwd_history" class="form-control input-sm" id="" placeholder="Password History">
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Must be Aplha-Numeric</label>
                         <div class="col-sm-10 input-group-sm">
-                            <select id="aplhaNumeric" class="form-control input-sm">
-                                <option selected>Yes</option>
-                                <option>No</option>
+                            <select id="aplhaNumeric" class="form-control input-sm" formControlName="is_alpha_numeric" name="is_alpha_numeric">
+                                <option selected value="true">Yes</option>
+                                <option value="false">No</option>
                             </select> 
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Must be Mixed</label>
                         <div class="col-sm-10 input-group-sm">
-                            <select id="mustBeMixed" class="form-control input-sm">
-                                <option selected>Yes</option>
-                                <option>No</option>
+                            <select id="mustBeMixed" class="form-control input-sm" formControlName="must_mixed" name="must_mixed">
+                                <option selected value="true">Yes</option>
+                                <option value="false">No</option>
                             </select> 
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Cannot content username</label>
                         <div class="col-sm-10 input-group-sm">
-                            <select id="contentUsername" class="form-control input-sm">
-                                <option selected>Yes</option>
-                                <option>No</option>
+                            <select id="contentUsername" class="form-control input-sm" formControlName="contains_username" name="contains_username">
+                                <option selected value="true">Yes</option>
+                                <option value="false">No</option>
                             </select> 
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Exclude List:</label>
                         <div class="col-sm-10 input-group-sm">
-                            <textarea class="form-control input-sm"></textarea>
+                            <textarea class="form-control input-sm" formControlName="excludeList" name="excludeList"> </textarea>
                             
                         </div>
                     </div>
