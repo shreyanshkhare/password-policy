@@ -7,7 +7,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         }
 
         const {token = ''} = JSON.parse(localStorage.getItem('userData') || '{}')
-        const modifyReq = req.clone({headers: req.headers.append('Auth', `Basic ${token}`)})
+        const modifyReq = req.clone({headers: req.headers.append("Authorization", `Token ${token}`)})
         return next.handle(modifyReq);
     }
 }

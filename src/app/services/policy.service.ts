@@ -41,7 +41,5 @@ export class PolicyService {
     this.activeTab = 1;   
     return result;
   }
- 
-  
 }
 
