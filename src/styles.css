@@ -1,4 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
+.card {
+    box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.1);
+    border-radius: 0px;
+    border: none;
+}
+.body{
+    background: #f7f7f7;
+}
+
+.custom-nav {
+    box-shadow: 0 1px 4px 0 rgba(12, 12, 13, 0.2);
+    background-color: wheat;
+}
+a.navbar-brand {
+    color: #08086d !important;
+    font-weight: bold;
+    letter-spacing: 10px;
+}
+.required-asterisk{
+    color: red;
+    font-weight: bold;
+    margin-left: 3px;
+    font-size: 1.2em;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -4,7 +4,7 @@ import { SCREEN_SIZE } from './screen-size.enum';
 
 @Component({
   selector: 'app-size-detector',
-  template: `<div (window:resize)="onResize()">
+  template: `<div (window:resize)="onResize()" class="d-none">
               <div *ngFor="let s of sizes" class="{{s.css + ' ' + (prefix + s.id) }}">{{s.name}}</div>
             </div>`,
 })

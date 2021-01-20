@@ -11,17 +11,17 @@ import {Policies} from '../shared/models/policy.model'
 export class PolicyService {
   @ViewChild('ngbNav') ngbNav;
 
-  policies = [ {
-    id:1,
-    policyName: 'Policy 1',
-    lastUpdated: 'f/f3/Flag_of_Russia.svg',
-    status: true,
-  }, {
-    id:2,
-    policyName: 'Policy 2',
-    lastUpdated: 'f/f3/Flag_of_Russia.svg',
-    status: false,
-  }]
+  // policies = [ {
+  //   id:1,
+  //   policyName: 'Policy 1',
+  //   lastUpdated: 'f/f3/Flag_of_Russia.svg',
+  //   status: true,
+  // }, {
+  //   id:2,
+  //   policyName: 'Policy 2',
+  //   lastUpdated: 'f/f3/Flag_of_Russia.svg',
+  //   status: false,
+  // }]
   activeTab = 1;
   constructor(private http: HttpClient) { }
   //constructor() { }
@@ -37,7 +37,7 @@ export class PolicyService {
   }
   addPolicy(policy):Observable<Policies[]>{
     const result = this.http.post<Policies[]>('/api/password_policy/', policy)
-     this.policies.unshift(policy);
+    // this.policies.unshift(policy);
     this.activeTab = 1;   
     return result;
   }
