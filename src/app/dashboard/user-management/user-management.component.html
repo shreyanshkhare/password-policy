@@ -1,15 +1,15 @@
-
 <div class="row justify-content-center">
     <div class="col-sm-12">
-        <p class="text-center">This page allows you to manage user</p>
+        <p class="text-center">This page allows you to manage user profile</p>
 
         <div class="card">
             <div class="card-body">
-                <h4>Login Detals</h4>
+                <h4>User Details</h4>
                 <!-- <form [formGroup]="addPolicyForm" (ngSubmit)="onSubmit()"> -->
                     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">Email Address</label>
+                        
+                        <label for="email" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Email Address</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="text" formControlName="email" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
                             <div *ngIf="submitted && f.email.errors" class="invalid-feedback" value={{userMail}}>
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label for="" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="password" formControlName="password" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.password.errors }"placeholder="" />
@@ -37,19 +37,10 @@
                                 <div *ngIf="f.password.errors.emailValidator">Password must be at least 6 characters</div>
                             </div>
                         </div>
-                    </div>
-                    <h4>Contact Details</h4>
-                    <!-- <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">Require Password Change</label>
-                        <div class="col-sm-10 input-group-sm">
-                            <select id="aplhaNumeric" class="form-control input-sm">
-                                <option selected>No</option>
-                            </select> 
-                        </div>
                     </div> -->
 
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">First Name</label>
+                        <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>First Name</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="text" formControlName="first_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }"placeholder="" />
                             <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
@@ -59,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">Last Name</label>
+                        <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Last Name</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="text" formControlName="last_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }"placeholder="" />
                             <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
@@ -69,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">Company Name</label>
+                        <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Company Name</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="text" formControlName="company_name" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.company_name.errors }"placeholder="" />
                             <div *ngIf="submitted && f.company_name.errors" class="invalid-feedback">
@@ -80,7 +71,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">Country</label>
+                        <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Country</label>
                         <div class="col-sm-10 input-group-sm">
                             <select id="aplhaNumeric" class="form-control input-sm" formControlName="country"
                             [ngClass]="{ 'is-invalid': submitted && f.country.errors }" placeholder="Select Country">
@@ -96,7 +87,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">Preferred Language</label>
+                        <label for="" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Preferred Language</label>
                         <div class="col-sm-10 input-group-sm">
                             <input type="text" formControlName="preferred_language" class="form-control " [ngClass]="{ 'is-invalid': submitted && f.preferred_language.errors }"placeholder="" />
                             <div *ngIf="submitted && f.preferred_language.errors" class="invalid-feedback">
@@ -109,8 +100,8 @@
                         Notice</span></div>
 
                     <div class="text-center">
-                        <button type="cancel" class="btn btn-sm btn-outline-primary mr-3 " (click)="onCancel()">Cancel</button>
-                        <button type="submit" class="btn btn-sm btn-danger ">Submit</button>
+                        <button type="button" class="btn btn-sm btn-danger mr-3 " (click)="onCancel()">Cancel</button>
+                        <button type="submit" class="btn btn-sm btn-success ">Submit</button>
                     </div>
                 </form>
             </div>
