@@ -69,7 +69,11 @@ export class AuthComponent implements OnInit, OnDestroy {
       private authService: AuthService,
       private toastr: ToastrService,
       private resizeService: ResizeService
-    ) { }
+    ) { 
+        this.resizeServiceSubscription = this.resizeService.onResize$.subscribe((x: SCREEN_SIZE) => {
+            this.size = x;
+          });
+    }
 
     size: SCREEN_SIZE
 
@@ -103,9 +107,6 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.loginSubscription = this.authService.user.subscribe(user => {
             this.onSuccess();
         })
-        this.resizeServiceSubscription = this.resizeService.resizeSubject.subscribe((x: SCREEN_SIZE) => {
-            this.size = x;
-          });
     }
 
     ngOnDestroy() {
