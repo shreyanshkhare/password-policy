@@ -17,20 +17,19 @@ export class UserManagementComponent implements OnInit {
   submitted = false;
   error = null;
   userID;
+  userMail
   userData;
   constructor(private formBuilder: FormBuilder,private toastr: ToastrService,private http:HttpClient) { }
 
   ngOnInit() {
 
       this.userData = JSON.parse(localStorage.getItem('userData'));
-      const userMail = this.userData['email'];
+      this.userMail = this.userData['email'];
       this.userID = this.userData['userId'];
-      console.log("userMail", userMail)
-      // email.setValue('Nancy');
       this.registerForm = this.formBuilder.group({
-          email: [userMail, [Validators.required, Validators.email]],
+          email: [this.userMail, [Validators.required, Validators.email]],
           // confirmEmail: ['', [Validators.required]],
-          password: ['', [Validators.required, Validators.minLength(6)]],
+        //   password: ['', [Validators.required, Validators.minLength(6)]],
           last_name: ['', Validators.required],
           first_name: ['', Validators.required],
           company_name: ['', Validators.required],
@@ -59,26 +58,41 @@ onSubmit() {
     }  
     else{
         this.http
-        .put("/api/user/"+this.userID+'/',
+        .patch("/api/user/"+this.userID+'/',
         data
         ).subscribe(responseData => {
             console.log("responseData", responseData);
             if (responseData){
             this.toastr.success("Thank you for filling in the form")
             }
-        // },error =>{
-        //     this.error = error.messages;
-        //     console.log("error")
-        // });
-        });   
+        },error =>{
+            this.error = error.messages;
+            console.log("error",this.error)
+            this.toastr.error("Oops! Something went wrong..")
+            this.registerForm.reset({
+                email: this.userMail,
+                country: "India",
+                last_name: '',
+                first_name:'',
+                company_name:'',
+                preferred_language:''
+              });
+            console.log("empty ")
+              });
+  
     }
     console.log("form values",this.registerForm.value);
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
 }
 onCancel(){
-    console.log("in cancel")
-    this.registerForm.reset()
-    this.toastr.warning("Cancel")
+    this.registerForm.reset({
+        email: this.userMail,
+        country: "India",
+        last_name: '',
+        first_name:'',
+        company_name:'',
+        preferred_language:''
+      });
+
 }
 }
 
