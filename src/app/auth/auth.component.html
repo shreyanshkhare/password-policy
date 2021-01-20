@@ -37,11 +37,23 @@
                 <div class="col-sm-12 col-md-6 h-100 text-center d-flex flex-column justify-content-center" [@slide]="isLoginMode ? 'signUpRight': 'signUpLeft'"
                    style="background-image: linear-gradient(to bottom left, rgb(33, 147, 176), rgb(109, 213, 237));"
                 >
-                    <h3 class="text-white font-weight-bold">Welcome Back!</h3>
-                    <p class="text-white ">To keep connected please login with your personal info</p>
-                    <div>
-                        <button class="btn btn-outline-light" (click)="onSwitchMode()" type="button">Switch to
-                            {{isLoginMode ? 'Sign Up':'Sign in'}}</button>
+                    <div *ngIf="!isLoginMode">
+                        <h3 class="text-white font-weight-bold">Welcome Back!</h3>
+                        <p class="text-white ">To keep connected please login with your personal info</p>
+                        <div>
+                            <button class="btn btn-outline-light" (click)="onSwitchMode()" type="button">
+                                Switch to Sign in
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="isLoginMode">
+                        <h3 class="text-white font-weight-bold">Wanna be our member!</h3>
+                        <p class="text-white ">Just fill your personal details and start jourey with us</p>
+                        <div>
+                            <button class="btn btn-outline-light" (click)="onSwitchMode()" type="button">
+                                Switch to Sign Up
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
