@@ -34,7 +34,7 @@ export class UserManagementComponent implements OnInit {
           first_name: ['', Validators.required],
           company_name: ['', Validators.required],
           country: ['India', Validators.required],
-          preferred_language: ['', Validators.required]
+          preferred_language: ['English', Validators.required]
     }, {
         // validator: emailValidator('email', 'confirmEmail')
     });
@@ -45,7 +45,6 @@ get f() { return this.registerForm.controls; }
 
 onSubmit() {
     const data =this. registerForm.value
-    console.log("onSubmit form data", data)
     this.submitted = true;   
     // const pdata = {email:this.userData['email'],
     // password:"test@123",
@@ -54,34 +53,23 @@ onSubmit() {
     // company_name:"xoriant",
     // country:"India"}
     if (this.registerForm.invalid) {
-        this.toastr.error('Enter correct user details');
+        this.toastr.error('Enter user details');
     }  
     else{
         this.http
         .patch("/api/user/"+this.userID+'/',
         data
         ).subscribe(responseData => {
-            console.log("responseData", responseData);
             if (responseData){
             this.toastr.success("Thank you for filling in the form")
             }
         },error =>{
             this.error = error.messages;
-            console.log("error",this.error)
             this.toastr.error("Oops! Something went wrong..")
-            this.registerForm.reset({
-                email: this.userMail,
-                country: "India",
-                last_name: '',
-                first_name:'',
-                company_name:'',
-                preferred_language:''
-              });
-            console.log("empty ")
               });
   
     }
-    console.log("form values",this.registerForm.value);
+
 }
 onCancel(){
     this.registerForm.reset({
@@ -90,7 +78,7 @@ onCancel(){
         last_name: '',
         first_name:'',
         company_name:'',
-        preferred_language:''
+        preferred_language:'English'
       });
 
 }
