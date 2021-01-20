@@ -1,8 +1,8 @@
 <div class="container d-flex align-items-center" style="height: 100vh;">
-    <div class="card flex-grow-1">
-        <div class="card-body">
-            <div class="row align-items-center">
-                <div class="col-sm-12">
+    <div class="card flex-grow-1 h-50 shadow border-0 bg-white rounded">
+        <div class="card-body h-100 p-0">
+            <div class="row align-items-center h-100 w-100 mx-0" >
+                <div class="col-sm-12 col-md-6" [@slide]="isLoginMode ? 'signInLeft' : 'signInRight'">
                     <h3 class="text-center">{{isLoginMode ? 'Sign in' : 'Create account'}}</h3>
                     <form #f="ngForm" (ngSubmit)="onSubmit(f)">
                         <div class="form-group">
@@ -26,13 +26,23 @@
                                 <small class="text-danger">Password should have atleast 6 charachter</small>
                             </div>
                         </div>
-                        <div>
+                        <div class="text-center">
                             <button class="btn btn-primary" type="submit" [disabled]="!f.valid">{{isLoginMode ? 'Sign in'
-                                : 'Sign Up'}}</button> |
-                            <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to
-                                {{isLoginMode ? 'Sign Up':'Sign in'}}</button>
+                                : 'Sign Up'}}</button>
+                            <!-- <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to
+                                {{isLoginMode ? 'Sign Up':'Sign in'}}</button> -->
                         </div>
                     </form>
+                </div>
+                <div class="col-sm-12 col-md-6 h-100 text-center d-flex flex-column justify-content-center" [@slide]="isLoginMode ? 'signUpRight': 'signUpLeft'"
+                   style="background-image: linear-gradient(to bottom left, rgb(33, 147, 176), rgb(109, 213, 237));"
+                >
+                    <h3 class="text-white font-weight-bold">Welcome Back!</h3>
+                    <p class="text-white ">To keep connected please login with your personal info</p>
+                    <div>
+                        <button class="btn btn-outline-light" (click)="onSwitchMode()" type="button">Switch to
+                            {{isLoginMode ? 'Sign Up':'Sign in'}}</button>
+                    </div>
                 </div>
             </div>
         </div>

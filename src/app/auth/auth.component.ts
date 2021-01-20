@@ -1,16 +1,49 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
 
+
+
 @Component({
     templateUrl: './auth.component.html',
-    selector: 'app-auth'
+    selector: 'app-auth',
+    animations: [
+        trigger('slide', [
+            // ...
+            state('signInRight', style({
+                transform: 'translate(100%, 0)'
+            })),
+            state('signInLeft', style({
+                transform: 'translate(0, 0)'
+            })),
+            state('signUpLeft', style({
+                transform: 'translate(-100%, 0)'
+            })),
+            state('signUpRight', style({
+                transform: 'translate(0, 0)'
+            })),
+            transition('signInLeft => signInRight', [
+              animate('0.5s')
+            ]),
+            transition('signInRight => signInLeft', [
+              animate('0.5s')
+            ]),
+            transition('signUpLeft => signUpRight', [
+                animate('0.5s')
+              ]),
+              transition('signUpRight => signUpLeft', [
+                animate('0.5s')
+              ]),
+          ])
+    ]
 })
 
 export class AuthComponent implements OnInit, OnDestroy {
+    @ViewChild('f', { read: NgForm }) f: any;
     isLoginMode: boolean = true;
     loginSubscription: Subscription;
 
@@ -18,6 +51,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
+        this.f.resetForm();
     }
 
     onSuccess = () => {
