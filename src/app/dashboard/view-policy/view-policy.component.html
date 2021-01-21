@@ -14,6 +14,7 @@
           <th scope="col">Name</th>
           <th scope="col">Last Updated</th>
           <th scope="col">Policy Status</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -23,12 +24,18 @@
           <td>{{policy.name}}</td>
           <td>{{policy.last_updated}} </td>
           <td>         
-            <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content,policy.id)"/> 
+            <input type="checkbox" [checked]="policy.status || submitted == true" (click)="!policy.status && open(content,policy.id)"/> 
+            <span *ngIf="policy.status" class="text-success ml-2"> Activate </span>
+          </td>
+          <td>
+            <button *ngIf='!policy.status' class="btn btn-sm btn-danger" (click)="openDeleteModal(contentDelete,policy.id,policy.name)"> <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
           </td>
         </tr>
         <tr class="text-center" *ngIf="policies.length < 0">
           <td colspan="4">Policy not found!</td>
         </tr>
+        
         </ng-container>
       </tbody>
     </table>
@@ -90,4 +97,17 @@
       
     </div>
   
+  </ng-template>
+
+  <!-- Delete Policy Modal -->
+
+  
+  <ng-template #contentDelete let-c="close" let-d="dismiss">
+    <div class="modal-body text-center">
+      <p>
+          Are you sure you want to delete <span class="text-primary"><strong>{{PolicyName}}</strong></span> Policy?
+      </p>
+        <button class="btn btn-sm btn-outline-secondary mr-4" (click)="d('Cross click')" type="button"> Cancel </button>
+        <button class="btn btn-sm btn-danger" type="button" (click)='deletePolicy()'> Delete </button>
+      </div>
   </ng-template>

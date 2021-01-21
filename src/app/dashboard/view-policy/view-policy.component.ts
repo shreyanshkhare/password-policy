@@ -25,6 +25,9 @@ export class ViewPolicyComponent implements OnInit {
   changePasswordForm: FormGroup;
   submitted = false;
   passwordIncorrect = false;
+  
+  deletePolicyId;
+  PolicyName;
   constructor(config: NgbModalConfig,
     private modalService: NgbModal,private policyService: PolicyService,
     private formBuilder: FormBuilder,private toastr: ToastrService, private authService: AuthService,
@@ -42,6 +45,11 @@ export class ViewPolicyComponent implements OnInit {
       this.passwordPolicyId = id;
       this.modalService.open(content);
       
+    }
+    openDeleteModal(contentDelete,id,name) {
+      this.modalService.open(contentDelete,{ centered: true });
+      this.deletePolicyId = id;
+      this.PolicyName = name;
     }
     
     ngOnInit(): void {
@@ -85,7 +93,7 @@ export class ViewPolicyComponent implements OnInit {
               }
             }             
             else{
-              this.toastr.success("Success! Your Password has been changed!");
+              this.toastr.success("Success! Your Password has been changed. Redirecting to login Page.");
               this.modalService.dismissAll();
               setTimeout(() => {
                 this.authService.logout();
@@ -94,10 +102,21 @@ export class ViewPolicyComponent implements OnInit {
             }
             
           });
-        }
-        
-        
+        }   
       }
+      
+      
+      deletePolicy() {
+        this.policyService.deletePolicy(this.deletePolicyId)
+        .subscribe( data => {
+          console.log(data);
+          this.deletePolicyId;
+          this.toastr.success("Policy has been successfully deleted");
+          this.modalService.dismissAll();
+          this.getPolicies();
+        })      
+      };
+      
       
     }
     

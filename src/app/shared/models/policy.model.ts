@@ -1,9 +1,9 @@
 export class Policies {
     id:number;
-    policyName: string;
-    minLenght:number;
-    expInterval:number;
-    passwordHistory:string;
+    name: string;
+    min_lenght:number;
+    exp_interval:number;
+    password_history:string;
     alphNum:boolean;
     mustMixed:boolean;
     contentUsername:string;
