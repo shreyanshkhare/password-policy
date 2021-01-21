@@ -18,6 +18,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SizeDetectorComponent } from './components/size-detector/size-detector.component';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +44,7 @@ import { SizeDetectorComponent } from './components/size-detector/size-detector.
     BrowserAnimationsModule,
   ],
   providers: [
+    { provide: "BASE_API_URL", useValue: environment.baseApiUrl },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     PolicyService],
   bootstrap: [AppComponent]

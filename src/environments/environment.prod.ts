@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://premchalmeti.com/pwd'
+  baseApiUrl: 'https://premchalmeti.com/pwd'
 };
