@@ -4,10 +4,12 @@
             <div class="card-header border-bottom-0">
                 This page allows you to manage user profile.
             </div>
-            <div class="card-body">
+            <p *ngIf="loader" class="font">Please wait! We are fetching details...</p>
+            <p *ngIf="errormsg" class="font">Oops! Something went wrong...</p>
+            <div *ngIf ="formValid" class="card-body">
                 <h4>User Details</h4>
                 <!-- <form [formGroup]="addPolicyForm" (ngSubmit)="onSubmit()"> -->
-                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <form [formGroup]="registerForm" (ngSubmit)="open(content)">
                     <div class="form-group row">
                         
                         <label for="email" class="col-sm-2 col-form-label"><span class="required-asterisk">*</span>Email Address</label>
@@ -81,6 +83,9 @@
                                 <option>Canada</option>
                                 <option>Denmark</option>
                                 <option>France</option>
+                                <option>Bangladesh</option>
+                                <option>Germany</option>
+                                <option>Italy</option>
                             </select> 
                             <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
                                 <div *ngIf="f.country.errors.required">Country is required</div>
@@ -110,3 +115,19 @@
     </div>
 </div>
 
+<div style="margin-top:245px">
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header ">
+      <h6 class="modal-title" id="modal-basic-title">Do you wish to update details?</h6>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+        
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-sm btn-success" (click)="onSubmit(content)">Save</button>
+    </div>
+  </ng-template>
+</div>

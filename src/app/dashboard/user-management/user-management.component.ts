@@ -4,6 +4,9 @@ import { MarkAsteriskDirective } from '../directives/mark-asterisk.directive';
 import{ emailValidator } from './validator';
 import { ToastrService } from 'ngx-toastr';
 import {HttpClient} from '@angular/common/http';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {UserDetailService} from './user-management.service';
+
 
 @Component({
   selector: 'app-user-management',
@@ -18,32 +21,65 @@ export class UserManagementComponent implements OnInit {
   error = null;
   userID;
   userMail
-  userData;
-  constructor(private formBuilder: FormBuilder,private toastr: ToastrService,private http:HttpClient) { }
+  UserDetails;
+  formValid:Boolean= false;
+  loader:Boolean= true;
+  errormsg:Boolean= false;
 
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder,private toastr: ToastrService,private http:HttpClient,
+    private UserDetailService:UserDetailService, private NgbModal:NgbModal) { }
 
-      this.userData = JSON.parse(localStorage.getItem('userData'));
-      this.userMail = this.userData['email'];
-      this.userID = this.userData['userId'];
-      this.registerForm = this.formBuilder.group({
-          email: [this.userMail, [Validators.required, Validators.email]],
-          // confirmEmail: ['', [Validators.required]],
-        //   password: ['', [Validators.required, Validators.minLength(6)]],
-          last_name: ['', Validators.required],
-          first_name: ['', Validators.required],
-          company_name: ['', Validators.required],
-          country: ['India', Validators.required],
-          preferred_language: ['English', Validators.required]
-    }, {
-        // validator: emailValidator('email', 'confirmEmail')
+
+    ngOnInit() {
+
+        this.userDetails()
+        const userData = JSON.parse(localStorage.getItem('userData'))
+        this.userID = userData['userId']
+
+
+    }
+
+userDetails(){
+
+    this.UserDetailService.getUserDetails().subscribe(resData =>{
+        this.loader = true;
+        this.UserDetails = resData;
+        if (this.UserDetails) {
+            // this.loader = false;
+            this.loader = false;
+            this.formValid = true;
+            this.registerForm = this.formBuilder.group({
+                email: [this.UserDetails['email'], [Validators.required, Validators.email]],
+                // confirmEmail: ['', [Validators.required]],
+                //   password: ['', [Validators.required, Validators.minLength(6)]],
+                last_name: [this.UserDetails['last_name'], Validators.required],
+                first_name: [this.UserDetails['first_name'], Validators.required],
+                company_name: [this.UserDetails['company_name'], Validators.required],
+                country: [this.UserDetails['country'], Validators.required],
+                preferred_language: [this.UserDetails['preferred_language'], Validators.required]
+            });
+        }
+    }, error => {
+        this.error = error.messages;
+        this.errormsg = true;
+        this.loader = false;
     });
+
+}
+
+
+open(content) {
+    this.NgbModal.open(content);
+  }
+
+  close(content) {
+    this.NgbModal.dismissAll(content);
 }
 
 
 get f() { return this.registerForm.controls; }
 
-onSubmit() {
+onSubmit(content) {
     const data =this. registerForm.value
     this.submitted = true;   
     // const pdata = {email:this.userData['email'],
@@ -62,6 +98,9 @@ onSubmit() {
         ).subscribe(responseData => {
             if (responseData){
             this.toastr.success("Thank you for filling in the form")
+            this.NgbModal.dismissAll(content);
+
+            // this.userDetails()
             }
         },error =>{
             this.error = error.messages;
@@ -73,12 +112,12 @@ onSubmit() {
 }
 onCancel(){
     this.registerForm.reset({
-        email: this.userMail,
-        country: "India",
-        last_name: '',
-        first_name:'',
-        company_name:'',
-        preferred_language:'English'
+        email: this.UserDetails['email'],
+        country: this.UserDetails['country'],
+        last_name: this.UserDetails['last_name'],
+        first_name:this.UserDetails['first_name'],
+        company_name:this.UserDetails['company_name'],
+        preferred_language:this.UserDetails['preferred_language']
       });
 
 }
