@@ -23,7 +23,7 @@
           <td>{{policy.name}}</td>
           <td>{{policy.last_updated}} </td>
           <td>         
-            <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content)"/> 
+            <input type="checkbox" [checked]="policy.status" (click)="!policy.status && open(content,policy.id)"/> 
           </td>
         </tr>
         <tr class="text-center" *ngIf="policies.length < 0">
@@ -46,29 +46,48 @@
       </button>
     </div>
     <div class="modal-body">
-      <form class="text-right">
+      <form class="text-right" [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()">
         <div class="form-group row">
             <label for="currentPassword" class="col-sm-5 col-form-label"> Current Password</label>
             <div class="col-sm-7">
-                <input type="password" class="form-control input-sm" id="currentPassword" value="">
-            </div>
+                <input type="password" class="form-control input-sm" formControlName="old_password" name="old_password" id="currentPassword" value="">
+                <div *ngIf="submitted && policyControl.old_password.errors">
+                  <small *ngIf="policyControl.old_password.errors.required" class="text-danger">Old Password is required</small>
+              </div>
+              </div>
+          
         </div>
         <div class="form-group row">
           <label for="newPassword" class="col-sm-5 col-form-label"> New Password</label>
           <div class="col-sm-7">
-              <input type="password" class="form-control input-sm" id="newPassword" value="">
-          </div>
+              <input type="password" class="form-control input-sm" formControlName="new_password" name="new_password" id="newPassword" value="">
+              <div *ngIf="submitted && policyControl.new_password.errors">
+                <small *ngIf="policyControl.new_password.errors.required" class="text-danger">Password is required</small>
+                <small *ngIf="policyControl.new_password.errors.minlength" class="text-danger">Password must be at least 9 characters</small>
+            </div>
+            </div>
+         
       </div>
       <div class="form-group row">
         <label for="varificationPassword" class="col-sm-5 col-form-label"> Confirm Password</label>
         <div class="col-sm-7">
-            <input type="password" class="form-control input-sm" id="varificationPassword" value="">
+            <input type="password" class="form-control input-sm" formControlName="confirm_password" name="confirm_password" id="varificationPassword" value="">
+            <div *ngIf="submitted && policyControl.confirm_password.errors">
+              <small *ngIf="policyControl.confirm_password.errors.required" class="text-danger">Confirm Password is required</small>
+              <small *ngIf="policyControl.confirm_password.errors.mustMatch"  class="text-danger">Passwords must match</small>
+          </div>
         </div>
+
+       
     </div>
+    <!-- <span *ngIf="createUserFormGroup.errors?.invalid">
+      Password doesn't match
+  </span> -->
+
+      <button type="submit" class="btn btn-sm btn-outline-dark">Save</button>
+
         </form>
-        
+      
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-sm btn-outline-dark" (click)="c('Save click')">Save</button>
-    </div>
+  
   </ng-template>

@@ -1,8 +1,9 @@
 import { Injectable,ViewChild } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable,of } from "rxjs";
 import {Policies} from '../shared/models/policy.model'
 
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,23 @@ export class PolicyService {
     const result = this.http.post<Policies[]>('/api/password_policy/', policy)
     // this.policies.unshift(policy);
     this.activeTab = 1;   
+    return result;
+  }
+
+  changePassword(obj){
+    
+   // const result  = this.http.patch('/api/change-password/', obj)
+
+    const result = this.http.patch('/api/change-password/', obj).pipe(
+      map((res: any) => {
+        if (!res.response) {
+          throw new Error('Value expected!');
+        }
+        return res;
+      }),
+      catchError(err => of([err.error]))
+    );
+
     return result;
   }
 }

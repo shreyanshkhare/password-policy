@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import {PolicyService} from 'src/app/services/policy.service';
 import { ToastrService } from 'ngx-toastr';
+import {Policies} from '../../../app/shared/models/policy.model'
 @Component({
   selector: 'app-add-policy',
   templateUrl: './add-policy.component.html',
@@ -16,12 +17,12 @@ export class AddPolicyComponent implements OnInit {
     this.addPolicyForm = this.formBuilder.group({      
       name: ['', Validators.required],
       min_length: ['', Validators.required],
-      exp_interval: [''],
-      pwd_history: [''],
+      exp_interval: [Number('')],
+      pwd_history: [Number('')],
       is_alpha_numeric: [''],
-      contains_username: [''],
-      must_mixed: [''],
-      status: ['false'],
+      contains_username: [false],
+      must_mixed: [],
+      status: [false],
       excludeList: ''
     });
   }
