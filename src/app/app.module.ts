@@ -17,7 +17,6 @@ import { PolicyService } from './services/policy.service';
 import { AuthInterceptorService } from './auth/auth-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { SizeDetectorComponent } from './components/size-detector/size-detector.component';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -29,12 +28,10 @@ import { environment } from 'src/environments/environment';
     AddPolicyComponent,
     AuthComponent,
     MarkAsteriskDirective,
-    UserManagementComponent,
-    SizeDetectorComponent
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,

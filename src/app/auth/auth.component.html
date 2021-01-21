@@ -23,9 +23,9 @@
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" id="password" class="form-control" ngModel name="password" required
-                                minlength="6" #pwInput="ngModel">
+                              #pwInput="ngModel" minlength>
                             <div *ngIf="pwInput.invalid && (pwInput.dirty || pwInput.touched)">
-                                <small *ngIf="emailInput.hasError('password')" class="text-danger">Password should have atleast 8 charachter</small>
+                                <small *ngIf="pwInput.hasError('required')" class="text-danger">Password is required</small>
                                 <small *ngIf="pwInput.hasError('passwordError')" class="text-danger">
                                     {{pwInput.errors.passwordError}}
                                 </small>

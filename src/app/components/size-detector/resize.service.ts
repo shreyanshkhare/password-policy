@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject, fromEvent, Observable } from "rxjs";
 import { distinctUntilChanged } from "rxjs/operators";
 import { SCREEN_SIZE } from "./screen-size.enum";
 
@@ -13,10 +13,21 @@ export class ResizeService {
     private resizeSubject: BehaviorSubject<SCREEN_SIZE>;
 
     constructor() {
-        this.resizeSubject = new BehaviorSubject(SCREEN_SIZE.LG);
-    }
+        this.resizeSubject = new BehaviorSubject(getBreakPoint());
 
-    onResize(size: SCREEN_SIZE) {
-        this.resizeSubject.next(size);
+        fromEvent(window, 'resize').subscribe(() => {
+            this.resizeSubject.next(getBreakPoint())
+        });
     }
-} 
+}
+
+function getBreakPoint() {
+    let bp = SCREEN_SIZE.XS;
+    const width = window.innerWidth
+    if (width >= 576) {bp = SCREEN_SIZE.SM}
+    if (width >= 768) {bp = SCREEN_SIZE.MD}
+    if (width >= 992) {bp = SCREEN_SIZE.LG}
+    if (width >= 1200) {bp = SCREEN_SIZE.XL}
+
+    return bp;
+}

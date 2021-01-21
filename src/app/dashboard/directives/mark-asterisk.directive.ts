@@ -14,5 +14,5 @@ export class MarkAsteriskDirective {
     if (parent.getElementsByTagName('LABEL').length && !parent.getElementsByClassName('required-asterisk').length) {
       parent.getElementsByTagName('LABEL')[0].innerHTML += '<span class="required-asterisk">*</span>';
     }
-}
+  }
 }
