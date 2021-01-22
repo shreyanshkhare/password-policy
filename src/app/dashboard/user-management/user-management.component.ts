@@ -83,20 +83,19 @@ get f() { return this.registerForm.controls; }
 
 
 onSubmit(content) {
-    const data =this. registerForm.value
+    const details =this. registerForm.value
     this.submitted = true;   
     if (this.registerForm.invalid) {
         this.toastr.error('Enter user details');
     }  
     else{
-        this.UserDetailService.updateUserDetails(data).subscribe(responseData => {
+        this.UserDetailService.updateUserDetails(details).subscribe(responseData => {
             if (responseData){
             this.toastr.success("Thank you for filling in the form")
             this.NgbModal.dismissAll(content);
             this.reset = this. registerForm.value;
-            this.UserDetailService.getUserDetails().subscribe(resData =>{
-                this.UserDetails = resData;})
-            }
+            this.UserDetails = this. registerForm.value;
+        }
         },error =>{
             this.error = error.messages;
             this.toastr.error("Oops! Something went wrong..")

@@ -22,7 +22,7 @@ export class UserDetailService {
     updateUserDetails(details){
         this.userData = JSON.parse(localStorage.getItem('userData'))
         this.id= this.userData['userId']
-        return this.http.post('/api/password_policy/'+this.id+'/', details)
+        return this.http.patch('/api/user/'+this.id+'/', details)
 
       }
 
