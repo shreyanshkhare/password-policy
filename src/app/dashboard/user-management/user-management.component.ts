@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import {HttpClient} from '@angular/common/http';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {UserDetailService} from './user-management.service';
+import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_transform';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class UserManagementComponent implements OnInit {
   formValid:Boolean= false;
   loader:Boolean= true;
   errormsg:Boolean= false;
+  reset;
 
   constructor(private formBuilder: FormBuilder,private toastr: ToastrService,private http:HttpClient,
     private UserDetailService:UserDetailService, private NgbModal:NgbModal) { }
@@ -45,7 +47,6 @@ userDetails(){
         this.loader = true;
         this.UserDetails = resData;
         if (this.UserDetails) {
-            // this.loader = false;
             this.loader = false;
             this.formValid = true;
             this.registerForm = this.formBuilder.group({
@@ -58,6 +59,7 @@ userDetails(){
                 country: [this.UserDetails['country'], Validators.required],
                 preferred_language: [this.UserDetails['preferred_language'], Validators.required]
             });
+            
         }
     }, error => {
         this.error = error.messages;
@@ -79,28 +81,21 @@ open(content) {
 
 get f() { return this.registerForm.controls; }
 
+
 onSubmit(content) {
     const data =this. registerForm.value
     this.submitted = true;   
-    // const pdata = {email:this.userData['email'],
-    // password:"test@123",
-    // first_name:"test",
-    // last_name:"test2",
-    // company_name:"xoriant",
-    // country:"India"}
     if (this.registerForm.invalid) {
         this.toastr.error('Enter user details');
     }  
     else{
-        this.http
-        .patch("/api/user/"+this.userID+'/',
-        data
-        ).subscribe(responseData => {
+        this.UserDetailService.updateUserDetails(data).subscribe(responseData => {
             if (responseData){
             this.toastr.success("Thank you for filling in the form")
             this.NgbModal.dismissAll(content);
-
-            // this.userDetails()
+            this.reset = this. registerForm.value;
+            this.UserDetailService.getUserDetails().subscribe(resData =>{
+                this.UserDetails = resData;})
             }
         },error =>{
             this.error = error.messages;
@@ -110,15 +105,18 @@ onSubmit(content) {
     }
 
 }
+somethingChanged(){
+    // console.log("Something changed in form")
+}
 onCancel(){
-    this.registerForm.reset({
-        email: this.UserDetails['email'],
-        country: this.UserDetails['country'],
-        last_name: this.UserDetails['last_name'],
-        first_name:this.UserDetails['first_name'],
-        company_name:this.UserDetails['company_name'],
-        preferred_language:this.UserDetails['preferred_language']
-      });
+        this.registerForm.reset({
+            email: this.UserDetails['email'],
+            country: this.UserDetails['country'],
+            last_name: this.UserDetails['last_name'],
+            first_name:this.UserDetails['first_name'],
+            company_name:this.UserDetails['company_name'],
+            preferred_language:this.UserDetails['preferred_language']
+          });
 
 }
 }
