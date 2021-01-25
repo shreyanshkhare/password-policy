@@ -33,13 +33,10 @@ export class UserManagementComponent implements OnInit {
 
 
     ngOnInit() {
-
         this.userDetails()
         const userData = JSON.parse(localStorage.getItem('userData'))
         this.userID = userData['userId']
-
-
-    }
+}
 
 userDetails(){
 
