@@ -16,7 +16,7 @@ export class UserDetailService {
     
     getUserDetails(){
 
-        return this.http.get<any>('/api/user/me').pipe(map((res:any)=>res))
+        return this.http.get<any>('/api/user/me/').pipe(map((res:any)=>res))
     }
 
     updateUserDetails(details){
