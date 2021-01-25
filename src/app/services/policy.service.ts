@@ -65,5 +65,14 @@ export class PolicyService {
     return this.http.delete<Policies[]>('/api/password_policy/'+id);
   }
 
+  editPolicy(policy){
+    const result = this.http.patch('/api/password_policy',policy);
+    return result;
+  }
+  updatePolicy(policy){
+    const result = this.http.patch('/api/password_policy/'+policy.id+'/',policy);
+    return result;
+  }
+
 }
 
