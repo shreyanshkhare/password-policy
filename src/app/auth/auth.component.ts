@@ -1,14 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { ResizeService } from '../components/size-detector/resize.service';
 import { SCREEN_SIZE } from '../components/size-detector/screen-size.enum';
+import { ValidateEmail } from '../_helpers/validator';
 import { AuthService } from './auth.service';
-
-
 
 @Component({
     templateUrl: './auth.component.html',
@@ -59,10 +58,14 @@ import { AuthService } from './auth.service';
 })
 
 export class AuthComponent implements OnInit, OnDestroy {
-    @ViewChild('f', { read: NgForm }) f: any;
     isLoginMode: boolean = true;
     loginSubscription: Subscription;
     resizeServiceSubscription: Subscription;
+    form = new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.email, ValidateEmail]),
+        password: new FormControl('', [Validators.required,])
+    })
+    log = console.log;
 
     constructor(
       private router: Router,
@@ -76,6 +79,19 @@ export class AuthComponent implements OnInit, OnDestroy {
     }
 
     size: SCREEN_SIZE
+
+    isInvalid(controlField: string) {
+        const field = this.form.get(controlField) || {invalid: '', dirty: '', touched: ''};
+        return field.invalid && (field.dirty || field.touched)
+    }
+
+    hasError(controlField: string, error: string): boolean {
+        return this.form.get(controlField).hasError(error)
+    }
+
+    private getValue(controlField: string): string {
+        return this.form.get(controlField).value
+    }
 
     slideFor(screen?: string) {
         const smaillDevice = [SCREEN_SIZE.XS, SCREEN_SIZE.SM].includes(this.size);
@@ -96,7 +112,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
-        this.f.resetForm();
+        this.form.reset();
     }
 
     onSuccess = () => {
@@ -114,40 +130,40 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.resizeServiceSubscription.unsubscribe();
     }
 
-    handleError(errors, form) {
+    handleError(errors) {
         if(!!errors['non_field_errors']) {
             this.toastr.error(errors["non_field_errors"])
         }
 
         Object.entries(errors).forEach(([key,value]) => {
             const errorKey = `${key}Error`;
-            form.form.controls[key].setErrors({[errorKey]: value});
+            this.form.controls[key].setErrors({[errorKey]: value});
         });
     }
     
 
-    onSubmit(form: NgForm) {
-        if (!form.valid) {
+    onSubmit() {
+        if (!this.form.valid) {
             return;
         }
         
-        const email = form.value.email;
-        const password = form.value.password;
+        const email = this.getValue('email');
+        const password = this.getValue('password');
         if (this.isLoginMode) {
             this.authService.login(email, password).subscribe(
                 (responseData) => {
                     this.router.navigate(['/dashboard']);
                 },
-                (errors) => {this.handleError(errors, form)}
+                (errors) => {this.handleError(errors)}
             );
         } else {
             this.authService.signUp(email, password).subscribe(
                 (responseData) => {
                     this.onSwitchMode();
-                    form.reset();
+                    this.form.reset();
                     this.toastr.success('Signup successfully please relogin with the newly created crediantials');
                 },
-                (errors) => {this.handleError(errors, form)}
+                (errors) => {this.handleError(errors)}
             );
         }
     }

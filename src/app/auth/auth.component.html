@@ -5,34 +5,48 @@
                 <div class="col-sm-12 col-md-6 py-4"
                     [@slide]="slideFor()">
                     <h3 class="text-center">{{isLoginMode ? 'Sign in' : 'Create account'}}</h3>
-                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                    <form
+                      [formGroup]="form" (ngSubmit)="onSubmit()">
+                      {{log(form)}}
                         <div class="form-group">
                             <label for="email">E-mail</label>
-                            <input type="email" id="email" class="form-control" ngModel name="email" required email
-                                #emailInput="ngModel">
-                            <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)">
-                                <small *ngIf="emailInput.hasError('required')" class="text-danger">Email is
+                            <input type="email" id="email" class="form-control"
+                                formControlName='email'
+                            >
+
+                            <div *ngIf="isInvalid('email')">
+                                <small *ngIf="hasError('email', 'required')" class="text-danger">Email is
                                     required</small>
-                                <small *ngIf="emailInput.hasError('email')" class="text-danger">Email is invalid</small>
-                                <small *ngIf="emailInput.hasError('emailError')" class="text-danger">
-                                    {{emailInput.errors.emailError}}
+                                <small *ngIf="hasError('email', 'email')" class="text-danger">Email is invalid</small>
+                                <small *ngIf="form.get('email').hasError('emailError')" class="text-danger">
+                                    {{form.get('email').errors.emailError}}
                                 </small>
                             </div>
-
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" id="password" class="form-control" ngModel name="password" required
-                              #pwInput="ngModel" minlength>
-                            <div *ngIf="pwInput.invalid && (pwInput.dirty || pwInput.touched)">
-                                <small *ngIf="pwInput.hasError('required')" class="text-danger">Password is required</small>
-                                <small *ngIf="pwInput.hasError('passwordError')" class="text-danger">
-                                    {{pwInput.errors.passwordError}}
-                                </small>
+                            <div class="d-flex flex-row">
+                                <input type="password" id="password" class="form-control"
+                                formControlName='password'
+                                >
+                                <div *ngIf="!isLoginMode">
+                                    <img class="img-responsive" src="assets/images/question.svg"
+                                    style="width: 20px; height: 35px; padding: 5px 0; cursor: pointer;"
+                                    [ngbTooltip]="tipContent"
+                                    />
+                                    <ng-template #tipContent>Password should have minimum 8 charachters</ng-template>
+                                </div>
+                            </div>
+
+                            <div *ngIf="isInvalid('password')">
+                                <small *ngIf="hasError('password', 'required')" class="text-danger">Password is required</small>
+                                <small *ngIf="hasError('password', 'passwordError')" class="text-danger">{{form.get('password').errors.passwordError}}</small>
                             </div>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">{{isLoginMode ? 'Sign in'
+                            <button class="btn btn-primary" type="submit"
+                              [disabled]="!form.valid"
+                            >{{isLoginMode ? 'Sign in'
                                 : 'Sign Up'}}</button>
                         </div>
                     </form>

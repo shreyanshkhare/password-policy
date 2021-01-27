@@ -58,11 +58,16 @@ export class ViewPolicyComponent implements OnInit {
     }
     closeChangeModal(){
       this.modalService.dismissAll();
-      this.changePasswordForm.reset()
+      this.changePasswordForm.reset();
+      this.submitted = false;
     }
     eventCheck(event){      
       event.target.checked = false;
     }
+    get policyFormControl() {
+      return this.editForm.controls;
+    }
+
     ngOnInit(): void {
       this.getPolicies();
       
