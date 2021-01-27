@@ -132,40 +132,48 @@
         <div class="row">
             <div class="col-sm-6 col-md-6">
               <div class="form-group input-group-sm">
-                <label for="policyName">Name</label>
-                <input type="text" class="form-control" formControlName="name" placeholder="Policy Name" value="">          
+                <label for="policyName">Name <span class="required-asterisk">*</span></label>
+                <input type="text" class="form-control" formControlName="name" placeholder="Policy Name" value=""> 
+                <small class="text-danger text-small"
+                *ngIf="(policyFormControl.name.touched || submitted) && policyFormControl.name.errors?.required">
+                Name is required!
+                </small>         
               </div>
             </div>
             <div class="col-sm-6 col-md-6">
               <div class="form-group input-group-sm">
-                <label for="policyMin">Min. Length</label>
-                <input type="text" class="form-control" formControlName="min_length" placeholder="Min. Length" value="">          
+                <label for="policyMin">Min. Length <span class="required-asterisk">*</span></label>
+                <input type="text" digitOnly  maxlength="2" class="form-control" formControlName="min_length" placeholder="Min. Length" value="">          
+                <small class="text-danger text-small"
+                *ngIf="(policyFormControl.min_length.touched || submitted) && policyFormControl.min_length.errors?.required">
+                Minimum Length is required!
+                </small>
               </div>
             </div>
             <div class="col-sm-6 col-md-6">
               <div class="form-group input-group-sm">
                 <label for="">Min. No</label>        
-                <input type="text" formControlName="min_number" name="min_number" class="form-control input-sm" id="" placeholder="Min. No">
+                <input type="text" digitOnly  maxlength="2" formControlName="min_number" name="min_number" class="form-control input-sm" id="" placeholder="Min. No">
                 
               </div>
             </div>
             <div class="col-sm-6 col-md-6">
               <div class="form-group input-group-sm">
                 <label for="">Min. Lowercase</label>        
-                <input type="text" formControlName="min_lowercase"  name="min_lowercase" class="form-control input-sm" id="" placeholder="Min. Lowercase">
+                <input type="text" digitOnly  maxlength="2" formControlName="min_lowercase"  name="min_lowercase" class="form-control input-sm" id="" placeholder="Min. Lowercase">
                 
               </div>
             </div>
             <div class="col-sm-6 col-md-6">
               <div class="form-group input-group-sm">
                 <label for="">Min. Uppercase</label>        
-                <input type="text" formControlName="min_uppercase"  name="min_uppercase" class="form-control input-sm" id="" placeholder="Min. Uppercase">
+                <input type="text" digitOnly  maxlength="2" formControlName="min_uppercase"  name="min_uppercase" class="form-control input-sm" id="" placeholder="Min. Uppercase">
               </div>
             </div>
             <div class="col-sm-6 col-md-6"> 
               <div class="form-groupinput-group-sm">
                 <label for="">Min. Special Char</label>      
-                <input type="text" formControlName="min_special_char"  name="min_special_char" class="form-control input-sm" id="" placeholder="Min. Special Char">
+                <input type="text" digitOnly  maxlength="2" formControlName="min_special_char"  name="min_special_char" class="form-control input-sm" id="" placeholder="Min. Special Char">
               </div>
             </div>
             <div class="col-sm-6 col-md-6">
@@ -183,7 +191,7 @@
         <!-- row -->
        
       <div class="text-right">
-        <button class="btn btn-info btn-sm" type="submit">Update</button>
+        <button class="btn btn-info btn-sm" [disabled]="!editForm.dirty" type="submit">Update</button>
       </div>
       
     </form>
