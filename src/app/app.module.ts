@@ -18,6 +18,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    DigitOnlyModule
   ],
   providers: [
     { provide: "BASE_API_URL", useValue: environment.baseApiUrl },
