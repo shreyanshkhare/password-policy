@@ -5,10 +5,10 @@ RUN mkdir -p /app/src
 WORKDIR /app/src
 COPY package.json .
 
-RUN npm install --force
+# RUN npm install --force
 
 COPY . .
 
-EXPOSE 4200
+# EXPOSE 4200
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
