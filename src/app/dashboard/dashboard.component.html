@@ -1,7 +1,7 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-12">
-        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs bg-gred">
+        <!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs bg-gred">
             <li [ngbNavItem]="1">
                 <a ngbNavLink>Password Policies</a>
                 <ng-template ngbNavContent>                    
@@ -21,8 +21,22 @@
                 </ng-template>
             </li>  
         </ul>        
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
-    </div>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div> -->
+
+        <ul class="nav nav-tabs bg-gred">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/password-policies">Password Policies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/add-password-policy">Add Password Policy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/user-management">User Management</a>
+            </li>
+         
+        </ul>
+        <router-outlet></router-outlet>
+        </div>
     </div>
     
 </div>

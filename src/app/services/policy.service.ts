@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable,ViewChild } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable,of } from "rxjs";
@@ -10,36 +11,19 @@ import { map, catchError } from 'rxjs/operators';
 })
 
 export class PolicyService {
-  @ViewChild('ngbNav') ngbNav;
-
-  // policies = [ {
-  //   id:1,
-  //   policyName: 'Policy 1',
-  //   lastUpdated: 'f/f3/Flag_of_Russia.svg',
-  //   status: true,
-  // }, {
-  //   id:2,
-  //   policyName: 'Policy 2',
-  //   lastUpdated: 'f/f3/Flag_of_Russia.svg',
-  //   status: false,
-  // }]
-  activeTab = 1;
-  constructor(private http: HttpClient) { }
-  //constructor() { }
-
-
+ 
+  constructor(private http: HttpClient, private router: Router) { }
+  
    getPolicies():Observable<Policies[]> {
-    //  getPolicies() {
-    //console.log("In service")
+   
     const result = this.http.get<Policies[]>('/api/password_policy/');
   
     //return this.policies;
     return result
   }
   addPolicy(policy):Observable<Policies[]>{
-    const result = this.http.post<Policies[]>('/api/password_policy/', policy)
-    // this.policies.unshift(policy);
-    this.activeTab = 1;   
+    const result = this.http.post<Policies[]>('/api/password_policy/', policy)   
+   this.router.navigate(['/dashboard/password-policies']);
     return result;
   }
 
