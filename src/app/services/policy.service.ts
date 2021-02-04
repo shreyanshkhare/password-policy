@@ -23,7 +23,8 @@ export class PolicyService {
   }
   addPolicy(policy):Observable<Policies[]>{
     const result = this.http.post<Policies[]>('/api/password_policy/', policy)   
-   this.router.navigate(['/dashboard/password-policies']);
+   //this.router.navigate(['/dashboard/password-policies']);
+   this.router.navigate(['/dashboard'], {fragment:'password-policies'})
     return result;
   }
 

@@ -1,41 +1,57 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-12">
-        <!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs bg-gred">
-            <li [ngbNavItem]="1">
-                <a ngbNavLink>Password Policies</a>
-                <ng-template ngbNavContent>                    
-                    <app-view-policy></app-view-policy>                    
-                </ng-template>
-            </li>
-            <li [ngbNavItem]="2">
-                <a ngbNavLink>Add Password Policy</a>
-                <ng-template ngbNavContent>
+            <!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs bg-gred">
+                <li [ngbNavItem]="1">
+                    <a ngbNavLink>Password Policies</a>
+                    <ng-template ngbNavContent>                    
+                        <app-view-policy></app-view-policy>                    
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                    <a ngbNavLink>Add Password Policy</a>
+                    <ng-template ngbNavContent>
+                        <app-add-policy></app-add-policy>
+                    </ng-template>
+                </li>            
+                <li [ngbNavItem]="3">
+                    <a ngbNavLink>User Management</a>
+                    <ng-template ngbNavContent>
+                        <app-user-management></app-user-management>
+                    </ng-template>
+                </li>  
+            </ul>        
+            <div [ngbNavOutlet]="nav" class="mt-2"></div> -->
+            
+            <ul class="nav nav-tabs bg-gred">
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{ 'active': 'password-policies' === active}"  fragment="password-policies"  routerLink="/dashboard">Password Policies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{ 'active': 'add-password-policy' === active}" fragment="add-password-policy" routerLink="/dashboard">Add Password Policy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{ 'active': 'user-management' === active}" fragment="user-management" routerLink="/dashboard">User Management</a>
+                </li>
+                
+            </ul>
+            <!-- <router-outlet></router-outlet> -->
+            
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" [ngClass]="{'show': 'password-policies' === active, 'active': 'password-policies' === active}" id="password-policies" role="tabpanel" aria-labelledby="home-tab">
+                    
+                    <app-view-policy></app-view-policy>  
+                </div>
+                <div class="tab-pane fade" [ngClass]="{'show': 'add-password-policy' === active, 'active': 'add-password-policy' === active}" id="add-password-policy" role="tabpanel" aria-labelledby="profile-tab">
+                    
                     <app-add-policy></app-add-policy>
-                </ng-template>
-            </li>            
-            <li [ngbNavItem]="3">
-                <a ngbNavLink>User Management</a>
-                <ng-template ngbNavContent>
+                </div>
+                <div class="tab-pane fade" [ngClass]="{'show': 'user-management' === active, 'active': 'user-management' === active}" id="user-management" role="tabpanel" aria-labelledby="contact-tab">
+                    
                     <app-user-management></app-user-management>
-                </ng-template>
-            </li>  
-        </ul>        
-        <div [ngbNavOutlet]="nav" class="mt-2"></div> -->
-
-        <ul class="nav nav-tabs bg-gred">
-            <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/password-policies">Password Policies</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/add-password-policy">Add Password Policy</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/dashboard/user-management">User Management</a>
-            </li>
-         
-        </ul>
-        <router-outlet></router-outlet>
+                </div>
+            </div>
+            
         </div>
     </div>
     

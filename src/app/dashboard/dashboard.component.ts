@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {PolicyService} from 'src/app/services/policy.service';
 
@@ -7,15 +8,15 @@ import {PolicyService} from 'src/app/services/policy.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  active = this.getActiveTab();
-  constructor(private policyService: PolicyService,) { }
+  active = 'password-policies';
+  constructor(private policyService: PolicyService,private route : ActivatedRoute) { }
   
   ngOnInit(): void {
-    this.getActiveTab()
+    this.route.fragment.subscribe( (frag) => {this.active = frag || this.active});
   }
 
   
-  getActiveTab(){    
-    return this.policyService.activeTab;   
-   }
+  // getActiveTab(){    
+  //   return this.policyService.activeTab;   
+  //  }
    }

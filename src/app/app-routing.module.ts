@@ -10,24 +10,24 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard],
-  children: [
-    {
-      path: 'password-policies', // child route path
-      component: ViewPolicyComponent, // child route component that the router renders
-    },
-    {
-      path: 'add-password-policy',
-      component: AddPolicyComponent, // another child route component that the router renders
-    },
-    {
-      path: 'user-management',
-      component: UserManagementComponent, // another child route component that the router renders
-    },
+  // children: [
+  //   {
+  //     path: 'password-policies', // child route path
+  //     component: ViewPolicyComponent, // child route component that the router renders
+  //   },
+  //   {
+  //     path: 'add-password-policy',
+  //     component: AddPolicyComponent, // another child route component that the router renders
+  //   },
+  //   {
+  //     path: 'user-management',
+  //     component: UserManagementComponent, // another child route component that the router renders
+  //   },
    
-    {
-      path: "", pathMatch: 'full',  redirectTo: "password-policies", // child route component that the router renders
-    },
-  ],
+  //   {
+  //     path: "", pathMatch: 'full',  redirectTo: "password-policies", // child route component that the router renders
+  //   },
+  // ],
 },
   { path: "auth", component: AuthComponent},
 ];
