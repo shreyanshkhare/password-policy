@@ -62,7 +62,7 @@ export class PolicyService {
 
  
   deletePolicy(id: number): Observable<Policies[]> {
-    return this.http.delete<Policies[]>('/api/password_policy/'+id);
+    return this.http.delete<Policies[]>('/api/password_policy/'+id+'/');
   }
 
   editPolicy(policy){

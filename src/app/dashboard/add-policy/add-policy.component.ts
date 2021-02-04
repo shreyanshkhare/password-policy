@@ -17,11 +17,11 @@ export class AddPolicyComponent implements OnInit {
     this.addPolicyForm = this.formBuilder.group({      
       name: ['', Validators.required],
       min_length: ['', Validators.required],
-      min_number: [''],
-      min_lowercase: [''],
-      min_uppercase: [''],
+      min_number: [0],
+      min_lowercase: [0],
+      min_uppercase: [0],
       contains_username: [false],
-      min_special_char: [],
+      min_special_char: [0],
       status: [false],
       excludeList: ''
     });
